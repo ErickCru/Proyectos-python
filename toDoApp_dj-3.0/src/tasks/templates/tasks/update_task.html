@@ -1,0 +1,33 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+
+<div class="card center-column">
+    <h5 class="card-header">Update Task</h5>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">{{ form.title.label }}</span>
+                </div>
+
+                <input class="form-control" type="text" name="title" id="id_title" placeholder="Title task"
+                    value="{{ form.title.value }}" />
+
+                <label class="form-control ml-2">{{ form.complete.label }}</label>
+
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        {{ form.complete }}
+                    </span>
+                </div>
+
+            </div>
+
+            <a class="btn btn-info" href="{% url 'list' %}">Cancel</a>
+            <button class="btn btn-success">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

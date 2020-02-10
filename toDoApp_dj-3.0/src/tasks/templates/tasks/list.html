@@ -1,0 +1,61 @@
+{% extends 'tasks/base.html' %}
+
+
+{% block css %}
+<style>
+    input {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+
+    input::placeholder {
+        color: #d3d3d3;
+    }
+
+    .submit {
+        background-color: #6BA3E8;
+    }
+
+    .item-row {
+        background-color: #906abd;
+        margin: 10px 0;
+        padding: 20px;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 16px;
+        box-shadow: 0px -1px 10px -4px rgba(0, 0, 0, 0.75);
+    }
+
+    .btn-danger {
+        background-color: #ffae19;
+        border-color: #e59400;
+    }
+</style>
+{% endblock css %}
+
+
+{% block content %}
+<div class="center-column">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.title }}
+        <button class="btn btn-info submit btn-block">Create task</button>
+    </form>
+
+    {% for task in tasks %}
+    <div class="item-row">
+        <a class="btn btn-info mr-2" href="{% url 'update_task' task.id %}">Update</a class="btn btn-info">
+        <a class="btn btn-danger mr-3" href="{% url 'delete_task' task.id %}">Delete</a>
+
+        {% if task.complete %}
+        <strike>{{ task }}</strike>
+        {% else %}
+        <span>{{ task }}</span>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
